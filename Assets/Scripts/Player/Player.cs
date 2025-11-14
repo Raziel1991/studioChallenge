@@ -2,23 +2,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Timer timer;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Find the Timer in the scene
+        timer = FindObjectOfType<Timer>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PickUp")) 
+        if (other.CompareTag("PickUp"))
         {
+            // Increment gem count
+            if (timer != null)
+            {
+                timer.CollectGem();
+            }
 
+            // Destroy the gem object
+            Destroy(other.gameObject);
         }
     }
 }
